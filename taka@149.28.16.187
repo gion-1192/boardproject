@@ -1,0 +1,90 @@
+set number
+set mouse=a
+set belloff=all
+
+hi Comment ctermfg=yellow
+set clipboard+=unnamed
+set tabstop=2
+set shiftwidth=2
+set foldmethod=indent
+set foldlevel=100
+
+inoremap <C-e> <Esc>$a
+inoremap <C-a> <Esc>^a
+inoremap jj <Esc>
+inoremap jw <Esc>:w<CR>
+inoremap jqq <Esc>:wq<CR>
+
+noremap qq <Esc>:q<CR>
+noremap ww <Esc>:w<CR>
+
+" open-browser.vim
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+let g:jsx_ext_required = 0
+
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+nmap go <Plug>(openbrowser-open)
+set guifont=Ricty-RegularForPowerline:h18
+
+noremap <C-e> <Esc>$a
+noremap <C-a> <Esc>^i
+set backspace=indent,eol,start
+noremap <SPACE>ru :!ruby %
+noremap <SPACE>rs :!rspec
+
+noremap <SPACE>in :Einitializer
+noremap <SPACE>cn :Econtroller
+noremap <SPACE>ge :Elib
+map <C-r> gt
+map <C-l> gT
+
+let OSTYPE = system('uname')
+if OSTYPE == "Darwin\n"
+    set noswapfile
+    set nowritebackup
+endif
+
+set splitbelow
+function! SpTerminalfunction()
+	execute 'sp'
+	execute 'terminal'
+endfunction
+command Spt :call SpTerminalfunction()
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/Users/taka/.cache/dein/repos/github.com/Shougo/dein.vim
+
+let s:dein_dir = expand('/Users/taka/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" Required:
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+	let s:toml_dir = expand('~/.config/nvim')
+
+	call dein#add(s:dein_repo_dir)
+	call dein#load_toml(s:toml_dir.'/dein.toml', {'lazy': 0})
+	call dein#load_toml(s:toml_dir.'/dein_lazy.toml', {'lazy': 1})
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+
+"-------------------------------------------
+
+let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'

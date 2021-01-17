@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block header %}
+	<div class="alert alert-primary" role="alert">
+		社内SNS
+	</div>
+{% endblock header %}
+{% block content %}
+<body>
+	<div class="container">
+		<div class="alert alert-success" role="alert">
+			<p>タイトル:{{obj.title}}</p>
+			<p>投稿者：{{obj.auther}}</p>
+			<p><img src={{obj.sns_image.url}} width="300"></p>
+			<button type="button" class="btn btn-primary btn-sm"><a href={% url 'good' obj.pk %}>いいね</a></button>
+			<button type="button" class="btn btn-secondary btn-sm">既読にする</button>
+		</div>
+</body>
+{% endblock content %}
